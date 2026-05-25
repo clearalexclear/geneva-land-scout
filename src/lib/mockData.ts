@@ -19,7 +19,10 @@ export interface Parcel {
   constraints: string[];
   recommendation: string;
   crmStatus: CrmStatus;
-  // map mock coords (percentage within map container)
+  // real geo coords (WGS84) near Geneva
+  lat: number;
+  lng: number;
+  // legacy mock coords (kept for landing page preview)
   x: number;
   y: number;
 }
@@ -40,7 +43,7 @@ export const parcels: Parcel[] = [
     constraints: ["Pente modérée", "Voisinage sensible"],
     recommendation: "Proposer une densification douce avec villas mitoyennes.",
     crmStatus: "a_contacter",
-    x: 72, y: 38,
+    lat: 46.2345, lng: 6.2128, x: 72, y: 38,
   },
   {
     id: "GE-CHB-2210",
@@ -57,7 +60,7 @@ export const parcels: Parcel[] = [
     constraints: ["Aucun arbre protégé"],
     recommendation: "Lancer une étude de faisabilité R+3.",
     crmStatus: "a_analyser",
-    x: 64, y: 52,
+    lat: 46.1968, lng: 6.1932, x: 64, y: 52,
   },
   {
     id: "GE-MEY-0815",
@@ -74,7 +77,7 @@ export const parcels: Parcel[] = [
     constraints: ["PLQ en cours", "Proximité voie ferrée"],
     recommendation: "Suivre l'évolution du PLQ et préparer une offre.",
     crmStatus: "en_discussion",
-    x: 22, y: 30,
+    lat: 46.2308, lng: 6.0798, x: 22, y: 30,
   },
   {
     id: "GE-LAN-3301",
@@ -91,7 +94,7 @@ export const parcels: Parcel[] = [
     constraints: ["Bâtiment existant à démolir"],
     recommendation: "Approche propriétaire — potentiel surélévation.",
     crmStatus: "contacte",
-    x: 40, y: 70,
+    lat: 46.1840, lng: 6.1195, x: 40, y: 70,
   },
   {
     id: "GE-CAR-4420",
@@ -108,7 +111,7 @@ export const parcels: Parcel[] = [
     constraints: ["Zone patrimoine"],
     recommendation: "Étudier rénovation lourde avec extension.",
     crmStatus: "a_analyser",
-    x: 48, y: 62,
+    lat: 46.1812, lng: 6.1405, x: 48, y: 62,
   },
   {
     id: "GE-VER-5582",
@@ -125,7 +128,7 @@ export const parcels: Parcel[] = [
     constraints: ["Bruit aéroport"],
     recommendation: "Évaluer typologies adaptées au bruit.",
     crmStatus: "a_analyser",
-    x: 30, y: 42,
+    lat: 46.2135, lng: 6.0866, x: 30, y: 42,
   },
   {
     id: "GE-PLP-6710",
@@ -142,7 +145,7 @@ export const parcels: Parcel[] = [
     constraints: ["Affectation à modifier", "Sol pollué présumé"],
     recommendation: "Dossier complexe — patience longue.",
     crmStatus: "abandonne",
-    x: 38, y: 80,
+    lat: 46.1665, lng: 6.1170, x: 38, y: 80,
   },
   {
     id: "GE-ONE-7821",
@@ -159,7 +162,7 @@ export const parcels: Parcel[] = [
     constraints: ["Servitude de passage"],
     recommendation: "Négocier la levée de servitude.",
     crmStatus: "a_contacter",
-    x: 28, y: 68,
+    lat: 46.1843, lng: 6.1030, x: 28, y: 68,
   },
   {
     id: "GE-THO-8930",
@@ -176,7 +179,7 @@ export const parcels: Parcel[] = [
     constraints: ["Refus voisinage probable"],
     recommendation: "Approche prudente, long terme.",
     crmStatus: "a_analyser",
-    x: 78, y: 48,
+    lat: 46.1965, lng: 6.1985, x: 78, y: 48,
   },
 ];
 
