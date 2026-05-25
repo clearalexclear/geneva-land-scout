@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as AppRouteImport } from './routes/_app'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AppOpportunitesRouteImport } from './routes/_app.opportunites'
 import { Route as AppDashboardRouteImport } from './routes/_app.dashboard'
 import { Route as AppCarteRouteImport } from './routes/_app.carte'
 
@@ -22,6 +23,11 @@ const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AppOpportunitesRoute = AppOpportunitesRouteImport.update({
+  id: '/opportunites',
+  path: '/opportunites',
+  getParentRoute: () => AppRoute,
 } as any)
 const AppDashboardRoute = AppDashboardRouteImport.update({
   id: '/dashboard',
@@ -38,11 +44,13 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/carte': typeof AppCarteRoute
   '/dashboard': typeof AppDashboardRoute
+  '/opportunites': typeof AppOpportunitesRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/carte': typeof AppCarteRoute
   '/dashboard': typeof AppDashboardRoute
+  '/opportunites': typeof AppOpportunitesRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -50,13 +58,20 @@ export interface FileRoutesById {
   '/_app': typeof AppRouteWithChildren
   '/_app/carte': typeof AppCarteRoute
   '/_app/dashboard': typeof AppDashboardRoute
+  '/_app/opportunites': typeof AppOpportunitesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/carte' | '/dashboard'
+  fullPaths: '/' | '/carte' | '/dashboard' | '/opportunites'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/carte' | '/dashboard'
-  id: '__root__' | '/' | '/_app' | '/_app/carte' | '/_app/dashboard'
+  to: '/' | '/carte' | '/dashboard' | '/opportunites'
+  id:
+    | '__root__'
+    | '/'
+    | '/_app'
+    | '/_app/carte'
+    | '/_app/dashboard'
+    | '/_app/opportunites'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -80,6 +95,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_app/opportunites': {
+      id: '/_app/opportunites'
+      path: '/opportunites'
+      fullPath: '/opportunites'
+      preLoaderRoute: typeof AppOpportunitesRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/_app/dashboard': {
       id: '/_app/dashboard'
       path: '/dashboard'
@@ -100,11 +122,13 @@ declare module '@tanstack/react-router' {
 interface AppRouteChildren {
   AppCarteRoute: typeof AppCarteRoute
   AppDashboardRoute: typeof AppDashboardRoute
+  AppOpportunitesRoute: typeof AppOpportunitesRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
   AppCarteRoute: AppCarteRoute,
   AppDashboardRoute: AppDashboardRoute,
+  AppOpportunitesRoute: AppOpportunitesRoute,
 }
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
