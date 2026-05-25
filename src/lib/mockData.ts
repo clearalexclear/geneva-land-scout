@@ -179,7 +179,7 @@ export const parcels: Parcel[] = [
     constraints: ["Refus voisinage probable"],
     recommendation: "Approche prudente, long terme.",
     crmStatus: "a_analyser",
-    x: 78, y: 48,
+    lat: 46.1965, lng: 6.1985, x: 78, y: 48,
   },
 ];
 
