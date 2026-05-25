@@ -19,7 +19,10 @@ export interface Parcel {
   constraints: string[];
   recommendation: string;
   crmStatus: CrmStatus;
-  // map mock coords (percentage within map container)
+  // real geo coords (WGS84) near Geneva
+  lat: number;
+  lng: number;
+  // legacy mock coords (kept for landing page preview)
   x: number;
   y: number;
 }
