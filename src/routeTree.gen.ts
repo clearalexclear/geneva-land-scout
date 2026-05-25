@@ -11,9 +11,14 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as AppRouteImport } from './routes/_app'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AppRapportsRouteImport } from './routes/_app.rapports'
+import { Route as AppParametresRouteImport } from './routes/_app.parametres'
 import { Route as AppOpportunitesRouteImport } from './routes/_app.opportunites'
 import { Route as AppDashboardRouteImport } from './routes/_app.dashboard'
+import { Route as AppCrmRouteImport } from './routes/_app.crm'
 import { Route as AppCarteRouteImport } from './routes/_app.carte'
+import { Route as AppAlertesRouteImport } from './routes/_app.alertes'
+import { Route as AppParcelleIdRouteImport } from './routes/_app.parcelle.$id'
 
 const AppRoute = AppRouteImport.update({
   id: '/_app',
@@ -23,6 +28,16 @@ const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AppRapportsRoute = AppRapportsRouteImport.update({
+  id: '/rapports',
+  path: '/rapports',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppParametresRoute = AppParametresRouteImport.update({
+  id: '/parametres',
+  path: '/parametres',
+  getParentRoute: () => AppRoute,
 } as any)
 const AppOpportunitesRoute = AppOpportunitesRouteImport.update({
   id: '/opportunites',
@@ -34,44 +49,97 @@ const AppDashboardRoute = AppDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => AppRoute,
 } as any)
+const AppCrmRoute = AppCrmRouteImport.update({
+  id: '/crm',
+  path: '/crm',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppCarteRoute = AppCarteRouteImport.update({
   id: '/carte',
   path: '/carte',
   getParentRoute: () => AppRoute,
 } as any)
+const AppAlertesRoute = AppAlertesRouteImport.update({
+  id: '/alertes',
+  path: '/alertes',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppParcelleIdRoute = AppParcelleIdRouteImport.update({
+  id: '/parcelle/$id',
+  path: '/parcelle/$id',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/alertes': typeof AppAlertesRoute
   '/carte': typeof AppCarteRoute
+  '/crm': typeof AppCrmRoute
   '/dashboard': typeof AppDashboardRoute
   '/opportunites': typeof AppOpportunitesRoute
+  '/parametres': typeof AppParametresRoute
+  '/rapports': typeof AppRapportsRoute
+  '/parcelle/$id': typeof AppParcelleIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/alertes': typeof AppAlertesRoute
   '/carte': typeof AppCarteRoute
+  '/crm': typeof AppCrmRoute
   '/dashboard': typeof AppDashboardRoute
   '/opportunites': typeof AppOpportunitesRoute
+  '/parametres': typeof AppParametresRoute
+  '/rapports': typeof AppRapportsRoute
+  '/parcelle/$id': typeof AppParcelleIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_app': typeof AppRouteWithChildren
+  '/_app/alertes': typeof AppAlertesRoute
   '/_app/carte': typeof AppCarteRoute
+  '/_app/crm': typeof AppCrmRoute
   '/_app/dashboard': typeof AppDashboardRoute
   '/_app/opportunites': typeof AppOpportunitesRoute
+  '/_app/parametres': typeof AppParametresRoute
+  '/_app/rapports': typeof AppRapportsRoute
+  '/_app/parcelle/$id': typeof AppParcelleIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/carte' | '/dashboard' | '/opportunites'
+  fullPaths:
+    | '/'
+    | '/alertes'
+    | '/carte'
+    | '/crm'
+    | '/dashboard'
+    | '/opportunites'
+    | '/parametres'
+    | '/rapports'
+    | '/parcelle/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/carte' | '/dashboard' | '/opportunites'
+  to:
+    | '/'
+    | '/alertes'
+    | '/carte'
+    | '/crm'
+    | '/dashboard'
+    | '/opportunites'
+    | '/parametres'
+    | '/rapports'
+    | '/parcelle/$id'
   id:
     | '__root__'
     | '/'
     | '/_app'
+    | '/_app/alertes'
     | '/_app/carte'
+    | '/_app/crm'
     | '/_app/dashboard'
     | '/_app/opportunites'
+    | '/_app/parametres'
+    | '/_app/rapports'
+    | '/_app/parcelle/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -95,6 +163,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_app/rapports': {
+      id: '/_app/rapports'
+      path: '/rapports'
+      fullPath: '/rapports'
+      preLoaderRoute: typeof AppRapportsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/parametres': {
+      id: '/_app/parametres'
+      path: '/parametres'
+      fullPath: '/parametres'
+      preLoaderRoute: typeof AppParametresRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/_app/opportunites': {
       id: '/_app/opportunites'
       path: '/opportunites'
@@ -109,6 +191,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppDashboardRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/crm': {
+      id: '/_app/crm'
+      path: '/crm'
+      fullPath: '/crm'
+      preLoaderRoute: typeof AppCrmRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/_app/carte': {
       id: '/_app/carte'
       path: '/carte'
@@ -116,19 +205,43 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppCarteRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/alertes': {
+      id: '/_app/alertes'
+      path: '/alertes'
+      fullPath: '/alertes'
+      preLoaderRoute: typeof AppAlertesRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/parcelle/$id': {
+      id: '/_app/parcelle/$id'
+      path: '/parcelle/$id'
+      fullPath: '/parcelle/$id'
+      preLoaderRoute: typeof AppParcelleIdRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
 interface AppRouteChildren {
+  AppAlertesRoute: typeof AppAlertesRoute
   AppCarteRoute: typeof AppCarteRoute
+  AppCrmRoute: typeof AppCrmRoute
   AppDashboardRoute: typeof AppDashboardRoute
   AppOpportunitesRoute: typeof AppOpportunitesRoute
+  AppParametresRoute: typeof AppParametresRoute
+  AppRapportsRoute: typeof AppRapportsRoute
+  AppParcelleIdRoute: typeof AppParcelleIdRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
+  AppAlertesRoute: AppAlertesRoute,
   AppCarteRoute: AppCarteRoute,
+  AppCrmRoute: AppCrmRoute,
   AppDashboardRoute: AppDashboardRoute,
   AppOpportunitesRoute: AppOpportunitesRoute,
+  AppParametresRoute: AppParametresRoute,
+  AppRapportsRoute: AppRapportsRoute,
+  AppParcelleIdRoute: AppParcelleIdRoute,
 }
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
@@ -140,3 +253,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
