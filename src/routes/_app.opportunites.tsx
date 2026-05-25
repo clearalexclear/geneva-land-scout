@@ -21,6 +21,7 @@ export const Route = createFileRoute("/_app/opportunites")({
 type SortKey = "score" | "surface" | "commune";
 
 function OpportunitesPage() {
+  const navigate = useNavigate();
   const [search, setSearch] = useState("");
   const [commune, setCommune] = useState("all");
   const [type, setType] = useState("all");
