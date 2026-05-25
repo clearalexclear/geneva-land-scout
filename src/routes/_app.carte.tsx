@@ -12,8 +12,9 @@ import { Separator } from "@/components/ui/separator";
 import {
   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
 } from "@/components/ui/select";
-import { parcels, communes, zones, scoreColor, typeLabel, riskLabel, Parcel } from "@/lib/mockData";
+import { parcels, communes, zones, typeLabel, riskLabel, Parcel } from "@/lib/mockData";
 import { X, MapPin, ArrowUpRight } from "lucide-react";
+import { GenevaMap } from "@/components/GenevaMap";
 
 export const Route = createFileRoute("/_app/carte")({
   component: CartePage,
