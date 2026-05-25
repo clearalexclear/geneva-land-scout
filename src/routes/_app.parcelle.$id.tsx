@@ -1,4 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { MapContainer, TileLayer, CircleMarker } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
 import { PageHeader } from "@/components/PageHeader";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -6,7 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
 import { parcels, riskLabel, typeLabel, scoreColor } from "@/lib/mockData";
-import { ArrowLeft, FileDown, Plus, User, MapPin } from "lucide-react";
+import { ArrowLeft, FileDown, Plus, User } from "lucide-react";
 
 export const Route = createFileRoute("/_app/parcelle/$id")({
   loader: ({ params }) => {
@@ -68,20 +70,33 @@ function ParcelDetailPage() {
         <div className="space-y-6 lg:col-span-2">
           {/* Map preview */}
           <Card className="overflow-hidden">
-            <div className="relative aspect-[16/7] bg-[linear-gradient(180deg,#eef2f7,#dbe3ec)]">
-              <svg className="absolute inset-0 h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-                <g stroke="#c8d3e1" strokeWidth="0.15">
-                  {Array.from({ length: 20 }).map((_, i) => (
-                    <line key={"v" + i} x1={i * 5} y1="0" x2={i * 5} y2="100" />
-                  ))}
-                  {Array.from({ length: 20 }).map((_, i) => (
-                    <line key={"h" + i} x1="0" y1={i * 5} x2="100" y2={i * 5} />
-                  ))}
-                </g>
-                <rect x="44" y="40" width="14" height="14" fill="oklch(0.62 0.13 155 / 0.35)" stroke="oklch(0.62 0.13 155)" strokeWidth="0.5" />
-              </svg>
-              <div className="absolute bottom-3 left-3 flex items-center gap-1.5 rounded-md bg-card/90 px-2 py-1 text-xs text-muted-foreground backdrop-blur">
-                <MapPin className="h-3 w-3" /> {p.commune}
+            <div className="relative aspect-[16/7]">
+              <MapContainer
+                center={[p.lat, p.lng]}
+                zoom={15}
+                scrollWheelZoom={false}
+                zoomControl={false}
+                dragging={false}
+                className="h-full w-full"
+                style={{ background: "#dbe3ec" }}
+              >
+                <TileLayer
+                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
+                  url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
+                />
+                <CircleMarker
+                  center={[p.lat, p.lng]}
+                  radius={12}
+                  pathOptions={{
+                    color: "#ffffff",
+                    weight: 3,
+                    fillColor: "oklch(0.62 0.13 155)",
+                    fillOpacity: 0.95,
+                  }}
+                />
+              </MapContainer>
+              <div className="pointer-events-none absolute bottom-3 left-3 flex items-center gap-1.5 rounded-md bg-card/90 px-2 py-1 text-xs text-muted-foreground backdrop-blur">
+                {p.commune} · {p.lat.toFixed(4)}N {p.lng.toFixed(4)}E
               </div>
             </div>
           </Card>

@@ -3,18 +3,19 @@ import { PageHeader } from "@/components/PageHeader";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { kpis, parcels, scoreColor, typeLabel } from "@/lib/mockData";
+import { parcels, scoreColor, typeLabel, calculateDashboardStats } from "@/lib/mockData";
 import { ArrowUpRight, Layers, MapPin, Sparkles, Bell, TrendingUp } from "lucide-react";
 
 export const Route = createFileRoute("/_app/dashboard")({
   component: DashboardPage,
 });
 
+const stats_ = calculateDashboardStats(parcels);
 const stats = [
-  { label: "Parcelles analysées", value: kpis.parcellesAnalysees.toLocaleString("fr-CH"), delta: "+312 ce mois", icon: Layers },
-  { label: "Opportunités détectées", value: kpis.opportunitesDetectees.toString(), delta: "+18 cette semaine", icon: Sparkles },
-  { label: "Potentiel logements estimé", value: kpis.potentielLogements.toLocaleString("fr-CH"), delta: "+240 ce mois", icon: TrendingUp },
-  { label: "Alertes actives", value: kpis.alertesActives.toString(), delta: "4 non lues", icon: Bell },
+  { label: "Parcelles analysées", value: stats_.parcellesAnalysees.toLocaleString("fr-CH"), delta: "+312 ce mois", icon: Layers },
+  { label: "Opportunités détectées", value: stats_.opportunitesDetectees.toString(), delta: `sur ${parcels.length} parcelles`, icon: Sparkles },
+  { label: "Potentiel logements estimé", value: stats_.potentielLogements.toLocaleString("fr-CH"), delta: "toutes parcelles confondues", icon: TrendingUp },
+  { label: "Alertes actives", value: stats_.alertesActives.toString(), delta: "2 non lues", icon: Bell },
 ];
 
 function DashboardPage() {

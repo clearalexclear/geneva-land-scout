@@ -4,11 +4,13 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { Parcel, scoreColor } from "@/lib/mockData";
 
-// Resolve Leaflet's default marker icons (not needed here since we use
-// CircleMarker, but keeps imports clean if we add Marker later).
 delete (L.Icon.Default.prototype as unknown as { _getIconUrl?: unknown })._getIconUrl;
 
 const GENEVA_CENTER: [number, number] = [46.2044, 6.1432];
+const MAX_BOUNDS: [[number, number], [number, number]] = [
+  [45.95, 5.85],
+  [46.45, 6.55],
+];
 
 const colorFor = (score: number) => {
   const c = scoreColor(score);
@@ -40,12 +42,14 @@ export function GenevaMap({
       center={GENEVA_CENTER}
       zoom={12}
       scrollWheelZoom
+      maxBounds={MAX_BOUNDS}
+      maxBoundsViscosity={0.8}
       className="h-full w-full"
       style={{ background: "#dbe3ec" }}
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
-        url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{y}/{x}{r}.png"
+        url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
       />
       {parcels.map((p) => {
         const isSel = selected?.id === p.id;
