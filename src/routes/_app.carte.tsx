@@ -103,45 +103,10 @@ function CartePage() {
         </aside>
 
         {/* Map */}
-        <div className="relative flex-1 overflow-hidden bg-[linear-gradient(180deg,#eef2f7,#dbe3ec)]">
-          <svg className="absolute inset-0 h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-            <path d="M0,18 Q30,28 55,20 Q80,14 100,26 L100,36 Q70,40 45,36 Q20,32 0,40 Z" fill="#9ec5e8" opacity="0.5" />
-            <path d="M0,55 Q35,52 60,60 Q85,68 100,60" stroke="#6ea3c9" strokeWidth="0.25" fill="none" opacity="0.7" />
-            <g stroke="#c8d3e1" strokeWidth="0.1">
-              {Array.from({ length: 40 }).map((_, i) => (
-                <line key={"v" + i} x1={i * 2.5} y1="0" x2={i * 2.5} y2="100" />
-              ))}
-              {Array.from({ length: 40 }).map((_, i) => (
-                <line key={"h" + i} x1="0" y1={i * 2.5} x2="100" y2={i * 2.5} />
-              ))}
-            </g>
-          </svg>
+        <div className="relative flex-1 overflow-hidden">
+          <GenevaMap parcels={filtered} selected={selected} onSelect={setSelected} />
 
-          {filtered.map((p) => {
-            const c = scoreColor(p.score);
-            const cls =
-              c === "success" ? "bg-success" :
-              c === "warning" ? "bg-warning" :
-              c === "destructive" ? "bg-destructive" :
-              "bg-muted-foreground/60";
-            const isSel = selected?.id === p.id;
-            return (
-              <button
-                key={p.id}
-                onClick={() => setSelected(p)}
-                className="absolute -translate-x-1/2 -translate-y-1/2 transition-transform hover:scale-110"
-                style={{ left: `${p.x}%`, top: `${p.y}%` }}
-                aria-label={p.id}
-              >
-                <span className={`block h-4 w-4 rounded-full ring-2 shadow-md ${cls} ${isSel ? "ring-primary" : "ring-white"}`} />
-                {isSel && (
-                  <span className="absolute left-1/2 top-full mt-1 -translate-x-1/2 whitespace-nowrap rounded bg-primary px-2 py-0.5 text-[10px] font-medium text-primary-foreground">
-                    {p.id}
-                  </span>
-                )}
-              </button>
-            );
-          })}
+
 
           {/* Legend */}
           <Card className="absolute bottom-4 left-4 w-auto">
