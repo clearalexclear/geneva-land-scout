@@ -76,10 +76,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "description", content: "Identifiez les parcelles non bâties, sous-exploitées ou à fort potentiel constructible à Genève." },
       { name: "author", content: "FoncierRadar" },
       { property: "og:title", content: "FoncierRadar — Radar foncier Genève" },
-      { property: "og:description", content: "Plateforme d'analyse foncière pour promoteurs immobiliers à Genève." },
+      { property: "og:description", content: "Identifiez les parcelles non bâties, sous-exploitées ou à fort potentiel constructible à Genève." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "FoncierRadar — Radar foncier Genève" },
+      { name: "twitter:description", content: "Identifiez les parcelles non bâties, sous-exploitées ou à fort potentiel constructible à Genève." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/20a34cbe-affd-44fc-8873-9dfb85acc0e2/id-preview-6fc3aa18--080f4ca2-ef27-4126-b63f-ab65d64b08dc.lovable.app-1779729406599.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/20a34cbe-affd-44fc-8873-9dfb85acc0e2/id-preview-6fc3aa18--080f4ca2-ef27-4126-b63f-ab65d64b08dc.lovable.app-1779729406599.png" },
     ],
     links: [
       {
