@@ -119,8 +119,8 @@ function ParcelDetailPage() {
               <p className="text-xs text-muted-foreground">Niveau global : {riskLabel(p.risk)}</p>
               <Separator className="my-4" />
               <div className="flex flex-wrap gap-2">
-                {p.constraints.map((c) => (
-                  <Badge key={c} variant="secondary">{c}</Badge>
+                {p.constraints.map((ct) => (
+                  <Badge key={ct} variant="secondary">{ct}</Badge>
                 ))}
               </div>
               <div className="mt-4 rounded-md border bg-muted/30 p-3 text-sm">
