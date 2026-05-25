@@ -123,26 +123,28 @@ function OpportunitesPage() {
                   "bg-muted text-muted-foreground";
                 const crm = crmColumns.find((x) => x.id === p.crmStatus)?.label ?? "—";
                 return (
-                  <TableRow key={p.id} className="cursor-pointer hover:bg-muted/40" asChild>
-                    <Link to="/parcelle/$id" params={{ id: p.id }}>
-                      <TableCell>
-                        <span className={`inline-flex h-9 w-9 items-center justify-center rounded-md text-sm font-semibold ${bg}`}>
-                          {p.score}
-                        </span>
-                      </TableCell>
-                      <TableCell className="font-medium">{p.address}</TableCell>
-                      <TableCell>{p.commune}</TableCell>
-                      <TableCell className="text-right">{p.surface.toLocaleString("fr-CH")} m²</TableCell>
-                      <TableCell><Badge variant="secondary">{typeLabel(p.type)}</Badge></TableCell>
-                      <TableCell className="text-xs text-muted-foreground">{p.zone}</TableCell>
-                      <TableCell className="text-right">{p.buildablePotential.toLocaleString("fr-CH")} m²</TableCell>
-                      <TableCell>
-                        <Badge variant={p.risk === "faible" ? "outline" : p.risk === "moyen" ? "secondary" : "destructive"}>
-                          {riskLabel(p.risk)}
-                        </Badge>
-                      </TableCell>
-                      <TableCell className="text-xs">{crm}</TableCell>
-                    </Link>
+                  <TableRow
+                    key={p.id}
+                    className="cursor-pointer hover:bg-muted/40"
+                    onClick={() => navigate({ to: "/parcelle/$id", params: { id: p.id } })}
+                  >
+                    <TableCell>
+                      <span className={`inline-flex h-9 w-9 items-center justify-center rounded-md text-sm font-semibold ${bg}`}>
+                        {p.score}
+                      </span>
+                    </TableCell>
+                    <TableCell className="font-medium">{p.address}</TableCell>
+                    <TableCell>{p.commune}</TableCell>
+                    <TableCell className="text-right">{p.surface.toLocaleString("fr-CH")} m²</TableCell>
+                    <TableCell><Badge variant="secondary">{typeLabel(p.type)}</Badge></TableCell>
+                    <TableCell className="text-xs text-muted-foreground">{p.zone}</TableCell>
+                    <TableCell className="text-right">{p.buildablePotential.toLocaleString("fr-CH")} m²</TableCell>
+                    <TableCell>
+                      <Badge variant={p.risk === "faible" ? "outline" : p.risk === "moyen" ? "secondary" : "destructive"}>
+                        {riskLabel(p.risk)}
+                      </Badge>
+                    </TableCell>
+                    <TableCell className="text-xs">{crm}</TableCell>
                   </TableRow>
                 );
               })}
